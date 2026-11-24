@@ -454,3 +454,6 @@ verify_jwt = false
 
 [functions.gift-stoppen]
 verify_jwt = false
+
+[functions.formulier]
+verify_jwt = false

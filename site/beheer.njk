@@ -170,6 +170,35 @@ scripts: ["/assets/js/inloggen.js", "/assets/js/beheer.js"]
       </div>
     </section>
 
+    <section class="beheer__blok" aria-labelledby="kop-formulieren">
+      <h2 id="kop-formulieren">Formulieren (bonisa.nl)</h2>
+      <p class="tekst-gedempt">Berichten via de formulieren op bonisa.nl: contact, nodig ons uit, magazine, vrijwilligers en adreswijzigingen. Elk bericht komt ook per mail binnen. Zet een bericht op "Afgehandeld" als het klaar is.</p>
+      <form class="formulier" data-formulierfilter>
+        <div class="velden">
+          <div class="veld">
+            <label for="fo-soort">Formulier</label>
+            <select id="fo-soort" name="soort">
+              <option value="">Alle formulieren</option>
+              <option value="contact">Contact</option>
+              <option value="uitnodiging">Nodig ons uit</option>
+              <option value="magazine">Magazine</option>
+              <option value="vrijwilliger">Vrijwilligers</option>
+              <option value="adreswijziging">Adreswijziging</option>
+            </select>
+          </div>
+          <div class="veld"><label for="fo-van">Van</label><input id="fo-van" name="van" type="date" required></div>
+          <div class="veld"><label for="fo-tot">Tot en met</label><input id="fo-tot" name="tot" type="date" required></div>
+        </div>
+        <div><button class="knop knop--zwart knop--klein" type="submit">Toon</button> <button class="knop knop--klein" type="button" data-actie="formulieren-export">Exporteer (CSV)</button></div>
+      </form>
+      <div class="tabel-scroll" tabindex="0" role="region" aria-label="Formulieren">
+        <table class="tabel">
+          <thead><tr><th>Datum</th><th>Formulier</th><th>Naam</th><th>E-mail en telefoon</th><th>Bericht</th><th>Status</th><th><span class="visueel-verborgen">Actie</span></th></tr></thead>
+          <tbody data-formulieren></tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="beheer__blok" aria-labelledby="kop-accounts">
       <h2 id="kop-accounts">Accounts</h2>
       <p class="tekst-gedempt">Scanners kunnen alleen de scanpagina gebruiken. Kantoor kan alles op deze pagina. Iemand die via Supabase is uitgenodigd, staat hier met "Geen rol": kies dan Scanner of Kantoor.</p>

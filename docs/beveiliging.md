@@ -11,10 +11,10 @@ Gevolg: alles wat op de site staat, kan overal ter wereld bekeken en bewaard wor
 | Dienst | Wat | Waar | Afspraak |
 | --- | --- | --- | --- |
 | Cloudflare (Worker met alleen statische bestanden) | Openbare pagina's | Wereldwijd, ook in Azië | Alleen openbare pagina's. **Geen** Cloudflare-functies (Workers) of formulieren voor iets met persoonsgegevens: die draaien bij Supabase in Frankfurt |
-| Supabase | Bestellingen, tickets, giften, aanmeldingen, functies | Frankfurt (`eu-central-1`) | Functies draaien standaard dicht bij de bezoeker. Altijd vastzetten op Frankfurt: `x-region: eu-central-1`, en voor Mollie-meldingen `?forceFunctionRegion=eu-central-1` |
+| Supabase | Bestellingen, tickets, giften, formulieren van bonisa.nl, aanmeldingen, functies | Frankfurt (`eu-central-1`) | Functies draaien standaard dicht bij de bezoeker. Altijd vastzetten op Frankfurt: `x-region: eu-central-1`, en voor Mollie-meldingen `?forceFunctionRegion=eu-central-1` |
 | Mollie | Betalingen; voor maandelijkse giften ook een klant (naam, e-mail) en de machtiging | EU | Bank- en betaalgegevens komen nooit op onze eigen systemen (betalen gebeurt op de pagina van Mollie) |
 | MailerLite | Nieuwsbriefadressen | Datacenter in de EU | |
-| MailerSend | Ticketmails | Verzending vanuit Duitsland en België | Navragen waar de mailgegevens worden bewaard. Krijgt naam, e-mailadres en de ticketcodes |
+| MailerSend | Ticketmails, bedankmails, berichten van de formulieren aan kantoor | Verzending vanuit Duitsland en België | Navragen waar de mailgegevens worden bewaard. Krijgt naam, e-mailadres, de ticketcodes en de inhoud van formulieren (die gaan naar het adres van kantoor) |
 | GitHub | Code en teksten | Verenigde Staten | Geen persoonsgegevens, geen wachtwoorden of sleutels. Europees alternatief: Codeberg (Berlijn) |
 | Pages CMS (online versie, app.pagescms.org) | Bewerkscherm voor de teksten en foto's | Niet bekendgemaakt | Krijgt toegang tot deze ene repository (code en teksten, geen persoonsgegevens) en bewaart de inloggegevens van wie het bewerkscherm gebruikt. Alleen de repository van de site koppelen (besluit 48) |
 | Claude | Hulp bij code en teksten | Verenigde Staten | Geen persoonsgegevens delen |
@@ -60,6 +60,7 @@ Gevolg: alles wat op de site staat, kan overal ter wereld bekeken en bewaard wor
 ### Formulieren
 - Een verborgen veld tegen spam. Komt er toch veel spam, dan een Europese botcontrole (bijvoorbeeld Friendly Captcha).
 - Maximaal 5 bestellingen per e-mailadres per uur.
+- Formulieren van bonisa.nl ([formulieren.md](formulieren.md)): maximaal 5 per e-mailadres per uur, velden per formulier gecontroleerd en begrensd, HTML in de mail aan kantoor ontsnapt. Een formulier zonder JavaScript gaat alleen terug naar een pagina op een eigen site.
 
 ### Back-ups en logboeken
 - Gratis plan: geen back-ups door Supabase. Daarom tijdens de verkoop een wekelijkse export volgens [back-up.md](back-up.md).
@@ -69,6 +70,7 @@ Gevolg: alles wat op de site staat, kan overal ter wereld bekeken en bewaard wor
 ### Bewaartermijn
 - Bestellingen: verwijderen of anonimiseren [X] maanden na het evenement (nog vaststellen).
 - Giften: naam en e-mail bewaren zolang de administratie dat vraagt (fiscaal meestal 7 jaar); daarna anonimiseren. Termijn nog vaststellen. Gestopte maandelijkse giften: ook bij Mollie de klant verwijderen.
+- Formulieren: nog vaststellen. Voorstel: contact, nodig ons uit en vrijwilligers een jaar na afhandelen verwijderen; magazine en adreswijziging zolang iemand het magazine krijgt. Kantoor kan een bericht op `/beheer/` verwijderen.
 - Nieuwsbriefadressen: tot iemand zich afmeldt.
 
 ### Controle vóór livegang (beveiligingsreview 7 november 2026)

@@ -51,6 +51,8 @@ De bouw begint lokaal en met testaccounts. Deze punten moeten geregeld zijn voor
 - [ ] Giften: afzender van de bedankmail (bijvoorbeeld giften@bonisa.nl) en bonisa.nl verifiëren in MailerSend.
 - [ ] Giften: welke projecten komen erin, met doelbedrag en vaste bedragen, en hoeveel er al via de bank binnenkwam.
 - [ ] Giften: bewaartermijn van gegevens van gevers, en of kantoor een jaaroverzicht per gever wil (voor de belastingaangifte van gevers).
+- [ ] Formulieren: naar welk adres gaat elk formulier (voorstel: info@bonisa.nl, "Nodig ons uit" naar voorlichting@bonisa.nl), en de bewaartermijn (docs/formulieren.md, beveiliging.md).
+- [ ] Beheerpagina: blijft die op jongerenzang.nl/beheer/, of liever op bonisa.nl (besluit 73)?
 - [ ] Webshop: bonisa.nl heeft nu WooCommerce (in WordPress). Uitzoeken: welke producten en hoeveel, verzending en voorraad, en welke betaalplugin WooCommerce gebruikt. Bekend (4 nov 2026): de webshop is gekoppeld aan het Mollie-account van Bonisa.
 - [ ] Welke webshopdienst bouwen we in, of volstaat bij weinig producten een eenvoudig bestelformulier op basis van het ticketsysteem?
 - [ ] Ontmoetingsreis: namen (voornaam), foto en persoonlijke tekst van de deelnemers; de voorbeelden Anna en Daan vervangen (docs/ontmoetingsreis.md).
