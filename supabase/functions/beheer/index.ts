@@ -6,7 +6,9 @@
 // evenement_opslaan, beheerders, beheerder_toevoegen, uitnodiging_opnieuw, rol_wijzigen,
 // beheerder_verwijderen,
 // and for gifts (docs/giften.md): giften_overzicht, giften_export,
-// periodieke_giften, periodiek_stoppen.
+// periodieke_giften, periodiek_stoppen,
+// and for the forms of bonisa.nl (docs/formulieren.md): formulieren,
+// formulier_afhandelen, formulier_verwijderen.
 // Everything except "ik" is only for the role kantoor.
 import {
   authAdmin, corsHeaders, DatabaseFout, gebruikerVan, json, log, rpc, siteVan, tabel, uitnodigen,
@@ -272,6 +274,32 @@ Deno.serve(async (req) => {
         const uitkomst = await stopPeriodiek({ id: v.id }, "kantoor");
         if (uitkomst === "onbekend") throw new Fout("onbekend", 404);
         antwoord = { uitkomst };
+        break;
+      }
+
+      // --- Forms (bonisa.nl) ----------------------------------------------------
+      case "formulieren": {
+        const van = String(v.van ?? ""), tot = String(v.tot ?? ""), soort = String(v.soort ?? "");
+        if (!DATUM.test(van) || !DATUM.test(tot) || van > tot) throw new Fout("ongeldige_periode");
+        if (soort && !["contact", "uitnodiging", "magazine", "vrijwilliger", "adreswijziging"].includes(soort)) {
+          throw new Fout("onbekend_formulier");
+        }
+        antwoord = await rpc("formulieren_lijst", { p_soort: soort, p_van: van, p_tot: tot });
+        break;
+      }
+
+      case "formulier_afhandelen": {
+        if (typeof v.id !== "string" || !UUID.test(v.id)) throw new Fout("onbekend", 404);
+        const gevonden = await rpc<boolean>("formulier_afhandelen", { p_id: v.id, p_klaar: v.klaar !== false });
+        if (!gevonden) throw new Fout("onbekend", 404);
+        antwoord = { id: v.id, klaar: v.klaar !== false };
+        break;
+      }
+
+      case "formulier_verwijderen": {
+        if (typeof v.id !== "string" || !UUID.test(v.id)) throw new Fout("onbekend", 404);
+        if (!(await rpc<boolean>("formulier_verwijderen", { p_id: v.id }))) throw new Fout("onbekend", 404);
+        antwoord = { verwijderd: v.id };
         break;
       }
 

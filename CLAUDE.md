@@ -40,6 +40,7 @@ Tijdens de bouw: lokaal en met testaccounts (Mollie-testmodus). Accounts op naam
 - `npm run test:tickets`: alle tests van het ticketsysteem
 - `npm run start:giften`: testversie mét de geefpagina's (`/geven/`, voor bonisa.nl)
 - `npm run test:giften`: alle tests van de giften (niet tegelijk met `test:tickets`)
+- `npm run test:formulieren`: alle tests van de formulieren van bonisa.nl (ook los draaien)
 
 ## Harde regels
 
@@ -67,4 +68,5 @@ Tijdens de bouw: lokaal en met testaccounts (Mollie-testmodus). Accounts op naam
 - Fase 3 gebouwd en lokaal getest: ticketmail met QR-codes, ticketpagina `/tickets/mijn/`, scanpagina `/scan/`, beheerpagina `/beheer/`, nieuwsbrief naar MailerLite.
 - Giften voor bonisa.nl gebouwd en lokaal getest: eenmalig en maandelijks, per project (`docs/giften.md`). Geefpagina's alleen met `GIFTEN_PAGINAS=aan`.
 - Sponsorpagina's van de Ontmoetingsreis gebouwd (10 november, `docs/ontmoetingsreis.md`): per deelnemer een pagina op het bestaande geefsysteem. **Nooit het land, plaatsen of precieze datums noemen**, ook niet in bestandsnamen, commits of pull requests; alleen "Azië".
+- 24 november: bonisa.nl krijgt een eigen repository (`Stichting-Bonisa/Bonisa`). **De achterkant voor beide sites blijft hier** (`supabase/`, besluit 71, `docs/twee-sites.md`). Formulieren voor bonisa.nl gebouwd en getest (`docs/formulieren.md`).
 - Nog niets online. Volgende stap: online zetten in Hugo's accounts (besluit 38); vanaf 25 november de voorkant van bonisa.nl.

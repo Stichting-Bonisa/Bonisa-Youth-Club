@@ -454,6 +454,69 @@
     } catch (e) { melding(e.message); }
   });
 
+  // --- Forms (bonisa.nl, docs/formulieren.md) ----------------------------------
+  const SOORTEN = { contact: "Contact", uitnodiging: "Nodig ons uit", magazine: "Magazine", vrijwilliger: "Vrijwilliger", adreswijziging: "Adreswijziging" };
+  const formulierfilter = $("[data-formulierfilter]");
+  {
+    // Default period: the last 30 days.
+    const p = (n) => String(n).padStart(2, "0");
+    const dag = (d) => `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+    const nu = new Date();
+    formulierfilter.elements.tot.value = dag(nu);
+    formulierfilter.elements.van.value = dag(new Date(nu.getFullYear(), nu.getMonth(), nu.getDate() - 30));
+  }
+  const formulierVraag = () => {
+    const { soort, van, tot } = formulierfilter.elements;
+    return vraag("formulieren", { soort: soort.value, van: van.value, tot: tot.value });
+  };
+  async function laadFormulieren() {
+    const lijst = await formulierVraag();
+    $("[data-formulieren]").replaceChildren(...(lijst.length ? [] : [Object.assign(document.createElement("tr"), { innerHTML: '<td colspan="7">Geen berichten in deze periode.</td>' })]), ...lijst.map((f) => {
+      const tr = document.createElement("tr");
+      const inhoud = Object.values(f.gegevens ?? {}).join(" · ");
+      tr.append(cel(datumTijd(f.datum)), cel(SOORTEN[f.soort] ?? f.soort), cel(`${f.voornaam} ${f.achternaam}`),
+        cel([f.email, f.telefoon].filter(Boolean).join(" · ")), cel(inhoud),
+        cel(f.afgehandeld_op ? `Afgehandeld ${datumTijd(f.afgehandeld_op)}` : "Nieuw"));
+      const actie = document.createElement("td");
+      const knop = document.createElement("button");
+      knop.type = "button";
+      knop.className = "tabel__knop";
+      knop.textContent = f.afgehandeld_op ? "Terug naar nieuw" : "Afgehandeld";
+      knop.addEventListener("click", async () => {
+        try { await vraag("formulier_afhandelen", { id: f.id, klaar: !f.afgehandeld_op }); laadFormulieren(); } catch (e) { melding(e.message); }
+      });
+      const weg = document.createElement("button");
+      weg.type = "button";
+      weg.className = "tabel__knop";
+      weg.textContent = "Verwijderen";
+      weg.setAttribute("aria-label", `Bericht van ${f.voornaam} ${f.achternaam} verwijderen`);
+      weg.addEventListener("click", async () => {
+        if (weg.dataset.zeker !== "ja") { weg.dataset.zeker = "ja"; weg.textContent = "Zeker weten?"; return; }
+        try { await vraag("formulier_verwijderen", { id: f.id }); melding("Het bericht is verwijderd.", true); laadFormulieren(); } catch (e) { melding(e.message); }
+      });
+      actie.append(knop, weg);
+      tr.append(actie);
+      return tr;
+    }));
+  }
+  formulierfilter.addEventListener("submit", (ev) => { ev.preventDefault(); laadFormulieren().catch((e) => melding(e.message)); });
+  $('[data-actie="formulieren-export"]').addEventListener("click", async () => {
+    try {
+      const lijst = await formulierVraag();
+      if (!lijst.length) return melding("Geen berichten in deze periode.", true);
+      const rijen = lijst.map((f) => ({
+        datum: f.datum, formulier: SOORTEN[f.soort] ?? f.soort, voornaam: f.voornaam, achternaam: f.achternaam,
+        email: f.email, telefoon: f.telefoon ?? "", ...f.gegevens, nieuwsbrief: f.nieuwsbrief ? "ja" : "nee",
+        afgehandeld: f.afgehandeld_op ?? "",
+      }));
+      // Same columns in every row, also when the forms differ.
+      const kolommen = [...new Set(rijen.flatMap((r) => Object.keys(r)))];
+      download(`formulieren_${formulierfilter.elements.van.value}_tot_${formulierfilter.elements.tot.value}.csv`,
+        csv(rijen.map((r) => Object.fromEntries(kolommen.map((k) => [k, r[k] ?? ""])))));
+      melding("De export staat in je map Downloads. Verwijder hem daar na gebruik.", true);
+    } catch (e) { melding(e.message); }
+  });
+
   $("[data-zoek]").addEventListener("input", toonBestellingen);
   $("[data-status]").addEventListener("change", toonBestellingen);
 
@@ -467,11 +530,11 @@
           root.querySelectorAll("[data-paneel], [data-heeft-evenement]").forEach((el) => { el.hidden = true; });
           nieuwblok.hidden = false;
           $('[data-actie="annuleer-nieuw"]').hidden = true;
-          await Promise.all([laadAccounts(), laadGiften()]);
+          await Promise.all([laadAccounts(), laadGiften(), laadFormulieren()]);
           return melding("Er is nog geen evenement. Maak hieronder het eerste evenement aan.", true);
         }
         if (!evenementen.some((e) => e.slug === slug)) slug = evenementen[0].slug;
-        await Promise.all([laadCijfers(), laadBestellingen(), laadAccounts(), laadGiften()]);
+        await Promise.all([laadCijfers(), laadBestellingen(), laadAccounts(), laadGiften(), laadFormulieren()]);
       } catch (e) { melding(e.message); }
     },
   });
