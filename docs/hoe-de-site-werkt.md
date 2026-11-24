@@ -58,7 +58,7 @@ site/assets/ (css, foto's...)  ─┘      (bouwen)        (wordt niet bewaard i
 
 Cloudflare bouwt de site bij elke push naar GitHub (`npm run build`) en zet de map `_site/` online (`npx wrangler deploy`). `wrangler.jsonc` vertelt Cloudflare welke map dat is, dat `/beheer` doorstuurt naar `/beheer/`, en dat onbekende adressen de 404-pagina krijgen. Er draait geen eigen code bij Cloudflare.
 
-Variabelen voor het bouwen (`FUNCTIES_URL`, `SUPABASE_PUBLIEKE_SLEUTEL`, eventueel `EVENEMENT`) staan in Cloudflare onder **Settings → Build → Build variables and secrets**. Na het wijzigen ervan: opnieuw bouwen.
+Variabelen voor het bouwen (`FUNCTIES_URL`, `SUPABASE_PUBLIEKE_SLEUTEL`, eventueel `EVENEMENT`) staan in Cloudflare onder **Settings → Build → Build variables and secrets**. Na het wijzigen ervan: opnieuw bouwen. Zonder `FUNCTIES_URL` (of met een verkeerd adres) stopt de bouw op Cloudflare met een duidelijke melding; een spatie, "/" of "." aan het eind wordt vanzelf weggehaald.
 
 Zelf controleren hoe Cloudflare de site serveert, met de beveiligingsregels: `npm run build` en daarna `npx wrangler dev`.
 
