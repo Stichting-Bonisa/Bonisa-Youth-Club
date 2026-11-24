@@ -6,7 +6,7 @@ Stichting Bonisa heeft twee websites, elk in een eigen repository in de GitHub-o
 
 | | jongerenzang.nl | bonisa.nl |
 | --- | --- | --- |
-| Repository | `Bonisa-Youth-Club` (deze; nu nog `hugoreijersen/bonisa-youth-club`) | `Stichting-Bonisa/Bonisa` |
+| Repository | `Stichting-Bonisa/Bonisa-Youth-Club` (deze) | `Stichting-Bonisa/Bonisa` |
 | Voorkant | Homepage, tickets, scanpagina, **beheerpagina** | Homepage, projecten en giften, Ontmoetingsreis, nieuws, activiteiten, magazine, formulieren, ANBI, contact |
 | Achterkant (`supabase/`) | **Hier**: alle migraties, functies en tests | Geen eigen achterkant; roept de functies hiernaast aan |
 | Bewerkscherm | Pages CMS op deze repository | Pages CMS op die repository |
@@ -35,4 +35,4 @@ Kantoor beheert tickets, giften, formulieren en accounts op één pagina: `/behe
 
 ## Wat er nog verhuist
 
-De geefpagina's (`site/geven/`) en de sponsorpagina's van de Ontmoetingsreis (`site/ontmoetingsreis/`) zijn hier gebouwd, achter `GIFTEN_PAGINAS=aan`. Ze staan nu ook in de repository van bonisa.nl. Zodra die online is, gaan ze hier weg, met `projecten.json`, `ontmoetingsreis.json`, `giften.js` en de scripts `geven*.js` en `delen.js` (besluit 74).
+De geefpagina's (`site/geven/`) en de sponsorpagina's van de Ontmoetingsreis (`site/ontmoetingsreis/`) zijn hier gebouwd, achter `GIFTEN_PAGINAS=aan`. Ze staan sinds 24 november ook in de repository van bonisa.nl; wijzig ze alleen daar. Zodra die online is, gaan ze hier weg, met `projecten.json`, `ontmoetingsreis.json`, `giften.js` en de scripts `geven*.js` en `delen.js` (besluit 74).
