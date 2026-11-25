@@ -18,6 +18,20 @@
   ],
   "musici": [
     {
+      "naam": "Arjan Wouters",
+      "rol": "Dirigent",
+      "foto": "",
+      "alt": "",
+      "geheim": false
+    },
+    {
+      "naam": "Noortje Colijn",
+      "rol": "Zang",
+      "foto": "",
+      "alt": "",
+      "geheim": false
+    },
+    {
       "naam": "Auke Kieviet",
       "rol": "Piano",
       "foto": "/assets/img/musicus-auke-kieviet.jpg",
