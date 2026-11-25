@@ -156,6 +156,19 @@ Testen met de echte Mollie-testomgeving: haal in `.env.local` de regel `MOLLIE_A
 8. **Cloudflare**: zet onder Settings → Build → **Build variables and secrets** de variabelen `FUNCTIES_URL` (`https://<project-ref>.supabase.co/functions/v1`) en `SUPABASE_PUBLIEKE_SLEUTEL` (de "publishable key" uit Project Settings → API Keys; die is openbaar bedoeld) en bouw opnieuw.
 9. Op de site: in het bewerkscherm "Ticketverkoop is open" aanzetten, met als link `/tickets/`.
 
+### Eindtest op de testsite
+
+Stand op 25 november 2026: de functies staan online, de verkoop is open op `/beheer/`, "Ticketverkoop is open" staat aan, en alle ticketknoppen (ook "Tickets" in het menu en de ronde knop) gaan naar `/tickets/`. Een bestelling maakt een betaling aan bij de echte Mollie. Loop deze stappen één keer helemaal door:
+
+1. Homepage: elke ticketknop opent `/tickets/`.
+2. `/tickets/`: bestel 2 tickets met je eigen e-mailadres, met en zonder het nieuwsbriefvakje.
+3. Mollie-testpagina: kies **Paid**. Je komt terug op de bedankpagina, die "betaald" toont. Probeer ook een keer **Failed**, **Canceled** en **Expired**.
+4. Ticketmail: komt binnen met één QR-code per ticket; de knop opent `/tickets/mijn/`.
+5. `/scan/`: log in, scan een QR-code (eerste keer groen, tweede keer "al gescand").
+6. `/beheer/`: de bestelling staat erin, export werkt, "ticketmail opnieuw" werkt.
+7. Nieuwsbrief: met het vakje aan staat je adres in de MailerLite-groep.
+8. Opruimen: bestellingen van de test op `/beheer/` laten staan of terugbetalen in het Mollie-testdashboard; zet vóór de echte verkoop het aantal vrije plaatsen goed.
+
 Live gaan met echte betalingen: alleen de `MOLLIE_API_KEY` vervangen door de `live_`-sleutel van het Mollie-account van de stichting. Eerst een paar echte bestellingen van € 4,50 doen en terugbetalen (fase 4).
 
 **Let op:** de prijs op de site (bewerkscherm) is alleen om te tonen. Het bedrag dat mensen betalen staat in `events.prijs_cent` (op `/beheer/` bij Gegevens van dit evenement). De bestelpagina haalt de echte prijs op en toont die, maar houd ze gelijk.
