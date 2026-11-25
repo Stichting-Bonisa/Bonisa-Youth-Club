@@ -18,6 +18,13 @@
   ],
   "musici": [
     {
+      "naam": "Auke Kieviet",
+      "rol": "Piano",
+      "foto": "/assets/img/musicus-auke-kieviet.jpg",
+      "alt": "Portret van Auke Kieviet",
+      "geheim": false
+    },
+    {
       "naam": "Jan Peter Teeuw",
       "rol": "Orgel",
       "foto": "/assets/img/musicus-jan-peter-teeuw.jpg",
@@ -25,10 +32,24 @@
       "geheim": false
     },
     {
-      "naam": "Auke Kieviet",
-      "rol": "Piano",
-      "foto": "/assets/img/musicus-auke-kieviet.jpg",
-      "alt": "Portret van Auke Kieviet",
+      "naam": "Cloe Elsme",
+      "rol": "Viool",
+      "foto": "",
+      "alt": "",
+      "geheim": false
+    },
+    {
+      "naam": "Mirthe van Hulst",
+      "rol": "Cello",
+      "foto": "",
+      "alt": "",
+      "geheim": false
+    },
+    {
+      "naam": "Lise den Munck",
+      "rol": "Dwarsfluit",
+      "foto": "",
+      "alt": "",
       "geheim": false
     }
   ],
