@@ -4,7 +4,7 @@
     {
       "naam": "Bart Bolier",
       "rol": "Host",
-      "foto": "/assets/img/host-bart-bolier.jpg",
+      "foto": "/assets/img/image_e507374c.jpg.jpeg",
       "alt": "Portret van Bart Bolier",
       "geheim": false
     },
@@ -20,15 +20,11 @@
     {
       "naam": "Arjan Wouters",
       "rol": "Dirigent",
-      "foto": "",
-      "alt": "",
       "geheim": false
     },
     {
       "naam": "Noortje Colijn",
       "rol": "Zang",
-      "foto": "",
-      "alt": "",
       "geheim": false
     },
     {
@@ -48,22 +44,16 @@
     {
       "naam": "Cloe Elsme",
       "rol": "Viool",
-      "foto": "",
-      "alt": "",
       "geheim": false
     },
     {
       "naam": "Mirthe van Hulst",
       "rol": "Cello",
-      "foto": "",
-      "alt": "",
       "geheim": false
     },
     {
       "naam": "Lise den Munck",
       "rol": "Dwarsfluit",
-      "foto": "",
-      "alt": "",
       "geheim": false
     }
   ],
